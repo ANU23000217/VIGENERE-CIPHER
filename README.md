@@ -1,6 +1,8 @@
 # VIGENERE-CIPHER
 ## EX. NO: 1(D)
- 
+
+### Name : JANARTHANAN K
+### Reg. No. : 212223040072
 
 ## IMPLEMETATION OF VIGENERE CIPHER
  
@@ -91,4 +93,4 @@ int main() {
 
 ## RESULT
 
-The program was executed successfully.
+The program is executed successfully
