@@ -1,5 +1,7 @@
 # VIGENERE-CIPHER
-## EX. NO: 4
+## DHARANI DHARAN K
+## 212223040036
+## EX. NO: 1(D)
  
 
 ## IMPLEMETATION OF VIGENERE CIPHER
@@ -20,17 +22,53 @@ alphabet shifted cyclically to the left compared to the previous alphabet, corre
 ## ALGORITHM:
 
 STEP-1: Arrange the alphabets in row and column of a 26*26 matrix.
+
 STEP-2: Circulate the alphabets in each row to position left such that the first letter is attached to last.
+
 STEP-3: Repeat this process for all 26 rows and construct the final key matrix.
+
 STEP-4: The keyword and the plain text is read from the user.
+
 STEP-5: The characters in the keyword are repeated sequentially so as to match with that of the plain text.
+
 STEP-6: Pick the first letter of the plain text and that of the keyword as the row indices and column indices respectively.
+
 STEP-7: The junction character where these two meet forms the cipher character.
+
 STEP-8: Repeat the above steps to generate the entire cipher text.
 
 
-## PROGRAM
+## PROGRAM :
+```
+def encrypt(text, key):
+    return ''.join(
+        chr((ord(t.upper()) - 65 + ord(key[i % len(key)].upper()) - 65) % 26 + 65)
+        for i, t in enumerate(text) if t.isalpha()
+    )
 
-## OUTPUT
+def decrypt(text, key):
+    return ''.join(
+        chr((ord(t.upper()) - 65 - (ord(key[i % len(key)].upper()) - 65) + 26) % 26 + 65)
+        for i, t in enumerate(text) if t.isalpha()
+    )
 
-## RESULT
+choice = input("1. Encrypt  2. Decrypt\nEnter choice: ")
+
+if choice == '1':
+    text = input("Enter plain text: ")
+    key = input("Enter key: ")
+    print("Cipher Text:", encrypt(text, key))
+
+elif choice == '2':
+    text = input("Enter cipher text: ")
+    key = input("Enter key: ")
+    print("Plain Text:", decrypt(text, key))
+else:
+    print("Invalid choice")
+```
+
+## OUTPUT :
+![image](https://github.com/user-attachments/assets/e80f38ec-bcd8-4fe9-9edd-c697377ee5d8)
+
+## RESULT :
+Hence the given vignere cipher program executed successfully.
