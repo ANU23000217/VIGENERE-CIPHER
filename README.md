@@ -40,31 +40,61 @@ STEP-8: Repeat the above steps to generate the entire cipher text.
 
 ## PROGRAM :
 ```
-def encrypt(text, key):
-    return ''.join(
-        chr((ord(t.upper()) - 65 + ord(key[i % len(key)].upper()) - 65) % 26 + 65)
-        for i, t in enumerate(text) if t.isalpha()
-    )
+#include <stdio.h>
+#include <string.h>
 
-def decrypt(text, key):
-    return ''.join(
-        chr((ord(t.upper()) - 65 - (ord(key[i % len(key)].upper()) - 65) + 26) % 26 + 65)
-        for i, t in enumerate(text) if t.isalpha()
-    )
+// Function to perform Vigenere encryption
+void vigenereEncrypt(char *text, const char *key) {
+    int textLen = strlen(text);
+    int keyLen = strlen(key);
+    for (int i = 0; i < textLen; i++) {
+        char c = text[i];
+        if (c >= 'A' && c <= 'Z') {
+            text[i] = ((c - 'A' + key[i % keyLen] - 'A') % 26) + 'A';
+        } else if (c >= 'a' && c <= 'z') {
+            text[i] = ((c - 'a' + key[i % keyLen] - 'A') % 26) + 'a';
+        }
+    }
+}
 
-choice = input("1. Encrypt  2. Decrypt\nEnter choice: ")
+// Function to perform Vigenere decryption
+void vigenereDecrypt(char *text, const char *key) {
+    int textLen = strlen(text);
+    int keyLen = strlen(key);
+    for (int i = 0; i < textLen; i++) {
+        char c = text[i];
+        if (c >= 'A' && c <= 'Z') {
+            text[i] = ((c - 'A' - (key[i % keyLen] - 'A') + 26) % 26) + 'A';
+        } else if (c >= 'a' && c <= 'z') {
+            text[i] = ((c - 'a' - (key[i % keyLen] - 'A') + 26) % 26) + 'a';
+        }
+    }
+}
 
-if choice == '1':
-    text = input("Enter plain text: ")
-    key = input("Enter key: ")
-    print("Cipher Text:", encrypt(text, key))
+int main() {
+    char key[100], message[100];
 
-elif choice == '2':
-    text = input("Enter cipher text: ")
-    key = input("Enter key: ")
-    print("Plain Text:", decrypt(text, key))
-else:
-    print("Invalid choice")
+    printf("Enter the message: ");
+    fgets(message, sizeof(message), stdin);
+    message[strcspn(message, "\n")] = '\0';  // Remove newline
+
+    printf("Enter the key (in uppercase): ");
+    fgets(key, sizeof(key), stdin);
+    key[strcspn(key, "\n")] = '\0';  // Remove newline
+
+    printf("\nSimulating Vigenere Cipher:\n");
+    printf("Original Message: %s\n", message);
+    printf("Key: %s\n", key);
+
+    vigenereEncrypt(message, key);
+    printf("Encrypted Message: %s\n", message);
+
+    vigenereDecrypt(message, key);
+    printf("Decrypted Message: %s\n", message);
+
+    return 0;
+}
+
 ```
 
 ## OUTPUT :
