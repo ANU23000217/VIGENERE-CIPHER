@@ -37,6 +37,7 @@ STEP-8: Repeat the above steps to generate the entire cipher text.
 
 #include <stdio.h>
 #include <string.h>
+
 // Function to perform Vigenere encryption
 void vigenereEncrypt(char *text, const char *key) {
     int textLen = strlen(text);
@@ -44,46 +45,51 @@ void vigenereEncrypt(char *text, const char *key) {
     for (int i = 0; i < textLen; i++) {
         char c = text[i];
         if (c >= 'A' && c <= 'Z') {
-            // Encrypt uppercase letters
             text[i] = ((c - 'A' + key[i % keyLen] - 'A') % 26) + 'A';
         } else if (c >= 'a' && c <= 'z') {
-            // Encrypt lowercase letters
             text[i] = ((c - 'a' + key[i % keyLen] - 'A') % 26) + 'a';
         }
     }
 }
+
 // Function to perform Vigenere decryption
 void vigenereDecrypt(char *text, const char *key) {
     int textLen = strlen(text);
     int keyLen = strlen(key);
     for (int i = 0; i < textLen; i++) {
         char c = text[i];
-
         if (c >= 'A' && c <= 'Z') {
-            // Decrypt uppercase letters
             text[i] = ((c - 'A' - (key[i % keyLen] - 'A') + 26) % 26) + 'A';
         } else if (c >= 'a' && c <= 'z') {
-            // Decrypt lowercase letters
             text[i] = ((c - 'a' - (key[i % keyLen] - 'A') + 26) % 26) + 'a';
         }
     }
 }
+
 int main() {
-    const char *key = "VAR"; 
-    char message[] = "saveethaengineeringcollege";
-    printf("Simulating Vigenere Cipher:\n");
-    // Print the original plain text
+    char key[100], message[100];
+
+    printf("Enter the message: ");
+    fgets(message, sizeof(message), stdin);
+    message[strcspn(message, "\n")] = '\0';  // Remove newline
+
+    printf("Enter the key (in uppercase): ");
+    fgets(key, sizeof(key), stdin);
+    key[strcspn(key, "\n")] = '\0';  // Remove newline
+
+    printf("\nSimulating Vigenere Cipher:\n");
     printf("Original Message: %s\n", message);
-    // Print the key used
     printf("Key: %s\n", key);
-    // Encrypt the message
+
     vigenereEncrypt(message, key);
     printf("Encrypted Message: %s\n", message);
-    // Decrypt the message back to the original
+
     vigenereDecrypt(message, key);
     printf("Decrypted Message: %s\n", message);
+
     return 0;
 }
+
 ```
 
 ## OUTPUT
